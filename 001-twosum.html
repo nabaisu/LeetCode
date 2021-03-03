@@ -1,0 +1,72 @@
+<script src="https://rawcdn.githack.com/nabaisu/jstinytest/28fe26d9a7c0de65b0c8e51b628782987683b751/simpletest.js"></script>
+<script>
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+
+var twoSum = function(nums, target) {
+    if (nums.length < 2) {
+        return []
+    }
+    for (let i = 0; i < nums.length; i++) {
+        const elementToFind = target - nums[i];
+        for (let ii = i+1; ii < nums.length; ii++) {
+            if (elementToFind === nums[ii]){
+                return [i, ii];
+            }
+        }
+    }
+    return []
+};
+
+/*
+// found solution, very good
+const twoSum = function(nums, target) {
+    if (nums.length < 2) {
+        return []
+    }
+    const comp = {};
+    for(let i=0; i<nums.length; i++){
+        if(comp[nums[i] ]>=0){
+            return [ comp[nums[i] ] , i]
+        }
+        comp[target-nums[i]] = i
+    }
+    return []
+};
+*/
+
+tests({
+  'has to return empty if less than 2 values': function () {
+    jeq(twoSum([] , 1), []);
+    jeq(twoSum([1] , 1), []);
+  },
+  'has to return empty if the sums are not found': function () {
+    jeq(twoSum([1,2] , 9), []);
+  },
+  'has to return the index of the values if the sum is there': function () {
+    jeq(twoSum([1,2] , 3), [0,1]);
+  },
+  'has to return the index of the values if the sum is there not in the first': function () {
+    jeq(twoSum([1,2,3] , 5), [1,2]);
+  },
+});
+
+
+tests({
+  'AT1': function () {
+    jeq(twoSum([2,7,11,15] , 9), [0,1]);
+  },
+  'AT2': function () {
+    jeq(twoSum([3,2,4] , 6), [1,2]);
+  },
+  'AT3': function () {
+    jeq(twoSum([3,3] , 6), [0,1]);
+  },
+});
+
+
+</script>

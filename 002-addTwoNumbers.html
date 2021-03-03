@@ -1,0 +1,62 @@
+<script src="https://rawcdn.githack.com/nabaisu/jstinytest/28fe26d9a7c0de65b0c8e51b628782987683b751/simpletest.js"></script>
+<script>
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+ var addTwoNumbers = function(l1, l2) {
+    let nL1 = reverseToNumber(l1);    
+    let nL2 = reverseToNumber(l2);    
+    
+    return reverseToArray(nL1 + nL2);
+
+    function reverseToNumber(array) {
+      return Number(array.reverse().join(''));
+    }
+
+    function reverseToArray(number) {
+      let arr = [];
+      for (let i = number.toString().length - 1; i >= 0; i--) {
+        arr.push(Number(number.toString()[i]));
+      }     
+      return arr;
+    }
+  };
+
+tests({
+  'has to add 2 numbers and return': function () {
+    jeq(addTwoNumbers([1] , [1]), [2]);
+  },
+  'has to add the numbers if more than 1': function () {
+    jeq(addTwoNumbers([2,3] , [5,6]), [7,9]); // 65+32 = 97
+  },
+  'has to add the numbers if sum more than 10': function () {
+    jeq(addTwoNumbers([7,3] , [5,6]), [2,0,1]); // 65+37 = 102
+  },
+});
+
+
+tests({
+  'AT1': function () {
+    jeq(addTwoNumbers([2,4,3] , [5,6,4]), [7,0,8]);
+  },
+  'AT2': function () {
+    jeq(addTwoNumbers([0] , [0]), [0]);
+  },
+  'AT3': function () {
+    jeq(addTwoNumbers([9,9,9,9,9,9,9], [9,9,9,9]), [8,9,9,9,0,0,0,1]);
+  },
+});
+
+
+
+</script>
